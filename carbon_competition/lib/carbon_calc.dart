@@ -1,18 +1,6 @@
 // Carbon calculation algorithm
 import "meal_carbon_calc.dart";
-
-class User {
-  // TODO: user weight
-  //int user_weight; //lbs
-
-  // TODO: input in different units
-  int user_heat_avg; //dollars
-
-  // TODO: multiple cars
-  int user_mpg;
-
-  User(this.user_heat_avg, this.user_mpg);
-}
+import "package:carbon_competition/user_class.dart";
 
 double calcDailyCarbonUsed(List<int> miles, List<Meal> meals, User user) {
   // meals = list of Meal Objects
