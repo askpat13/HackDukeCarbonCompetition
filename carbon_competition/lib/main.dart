@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'device_uuid.dart';
 
-void main() => runApp(MaterialApp(
+void main() {
+    runApp(MaterialApp(
       title: 'Carbon app',
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CarbonHome(),
-));
+      home: CarbonHome()
+    ));
+    getUuid();
+}
+
+void getUuid() async {
+    print(await getDeviceUuid());
+}
 
 class CarbonHome extends StatelessWidget {
     @override

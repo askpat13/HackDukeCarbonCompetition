@@ -17,6 +17,5 @@ Future<String> getDeviceUuid() async {
     print('Failed to get platform version');
     return null;
   }
-  print(uuid);
   return uuid;
 }
