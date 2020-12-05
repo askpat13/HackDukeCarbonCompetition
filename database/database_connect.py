@@ -33,14 +33,20 @@ def reset_daily_data():
         "CARBON INT )")
     print("DAILY_DATA initialized.")
 
+def insert_data():
+    sql = "INSERT INTO PERSISTENT_DATA (USERNAME, TODAYS_DATE, CARBON) VALUES (%s, %s, %d)"
+    val = ("shuf", "2020-12-05", 6)
+    cursor.execute(sql, val)
+
 
 a = input("Type YES to destroy ALL DATA: ")
 if a == "YES":
 
-    cnxn = mysql.connector.connect(**config)
-    cursor = cnxn.cursor()
+    cnn = mysql.connector.connect(**config)
+    cursor = cnn.cursor()
 
     reset_persistent_data()
     reset_daily_data()
 
-    cnxn.close()
+    cnn.commit()
+    cnn.close()
