@@ -1,7 +1,9 @@
 Google Cloud
 
 MySQL
-hackduke-carbon-competition
-	2pMdJzGj9kGL31Gi
-Connection Name
-	calcium-task-297704:us-east1:hackduke-carbon-competition
+Instance Name: hackduke-carbon-competition
+Password: 2pMdJzGj9kGL31Gi
+Public IP Address: 35.185.8.152
+Database: hackduke-carbon-competition
+	Table 1: PERSISTENT_DATA
+	Table 2: DAILY_DATA
