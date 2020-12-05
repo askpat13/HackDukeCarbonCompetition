@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "732798755894",
+    "project_id": "carbon-competition",
+    "storage_bucket": "carbon-competition.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732798755894:android:d7d4251128ba3a0dd2e497",
+        "android_client_info": {
+          "package_name": "team.carbon_competition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732798755894-6kdq3bvedku1veuvq7ka2q563rhkt7al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhagv9qMk8Ynw5a2OoiUsKvCCxAlZicts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732798755894-6kdq3bvedku1veuvq7ka2q563rhkt7al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
