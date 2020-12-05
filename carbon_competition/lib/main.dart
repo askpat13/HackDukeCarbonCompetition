@@ -1,4 +1,6 @@
+import 'package:carbon_competition/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:carbon_competition/carbon_calc.dart';
 import 'device_uuid.dart';
 
 void main() {
@@ -10,11 +12,16 @@ void main() {
       ),
       home: CarbonHome()
     ));
+
     getUuid();
 }
 
+// TODO: move to different file
 void getUuid() async {
     print(await getDeviceUuid());
+    String uuid = await getDeviceUuid();
+    User test_user = new User(12, 30);
+    await DatabaseService(uid: uuid).updateUserData(test_user);
 }
 
 class CarbonHome extends StatelessWidget {
