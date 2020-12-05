@@ -1,0 +1,7 @@
+Google Cloud
+
+MySQL
+hackduke-carbon-competition
+	2pMdJzGj9kGL31Gi
+Connection Name
+	calcium-task-297704:us-east1:hackduke-carbon-competition
