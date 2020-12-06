@@ -32,6 +32,15 @@ class User {
     dataByDay[dayNo].addCarbon(carbon);
   }
 
+  // reset today's carbon (kilograms) to zero
+  static void resetCarbon() {
+    int dayNo = today();
+    if (!dataByDay.containsKey(dayNo)) {
+      dataByDay[dayNo] = new DailyData();
+    }
+    dataByDay[dayNo].carbonUsage = 0.0;
+  }
+
   // get carbon (kilograms) for today
   static double getCarbon() {
     int dayNo = today();
