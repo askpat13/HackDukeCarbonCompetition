@@ -11,7 +11,7 @@ class User {
   //int user_weight; //lbs
 
   static String name = "User";
-  static String zip = "";
+  static String zip = "0";
   static int level = 0;
   static int icon = 0;
 
