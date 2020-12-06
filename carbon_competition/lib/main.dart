@@ -25,11 +25,13 @@ void main() {
     },
   ));
   initializeUser();
-  calcAvgHousingCarbon('10520');
 }
 
 void initializeUser() async {
   await User.pullFromDatabase();
   User.addCarbon(600);
   User.printUser();
+
+  double avg = await calcAvgHousingCarbon('10520');
+  print(avg);
 }
