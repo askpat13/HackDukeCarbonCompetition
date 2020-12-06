@@ -1,15 +1,15 @@
 
 class DailyData {
-  int carbonUsage = 0;
+  double carbonUsage = 0;
 
-  DailyData([int carbon]) {
+  DailyData([double carbon]) {
     if (carbon != null) {
       this.carbonUsage = carbon;
     }
   }
 
   // add carbon to today
-  void addCarbon(int carbon) {
+  void addCarbon(double carbon) {
     carbonUsage += carbon;
   }
 

@@ -15,9 +15,6 @@ class User {
   static int level = 0;
   static int icon = 0;
 
-  // TODO: input in different units
-  // static int userHeatAvg = 0; //dollars
-
   static double userAvgDailyHousingCarbon = 0;
 
   // TODO: multiple cars
