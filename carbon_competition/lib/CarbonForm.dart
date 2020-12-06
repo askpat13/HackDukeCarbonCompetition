@@ -1,5 +1,6 @@
 import 'package:carbon_competition/carbon_calcs/carbonform_info_class.dart';
 import 'package:carbon_competition/carbon_calcs/meal_carbon_calc.dart';
+import 'package:carbon_competition/carbon_calcs/transport_carbon_calc.dart';
 import 'package:flutter/material.dart';
 import 'package:carbon_competition/user_class.dart';
 import 'BottomNavBar.dart';
@@ -95,6 +96,70 @@ class _CarbonForm extends State<CarbonForm> {
               else {
                 double carbonFromDrink = calcCarbonFromDrink(value.toLowerCase());
                 User.addCarbon(carbonFromDrink);
+                User.pushToDatabase();
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Miles by car?',
+            ),
+            validator: (value) {
+              if (value == ""){
+                // do nothing if nothing is entered
+              }
+              else {
+                double carbonFromCar = calcCarbonFromCar(double.parse(value));
+                User.addCarbon(carbonFromCar);
+                User.pushToDatabase();
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Miles by bus?',
+            ),
+            validator: (value) {
+              if (value == ""){
+                // do nothing if nothing is entered
+              }
+              else {
+                double carbonFromTransport = calcCarbonFromTransport("bus",double.parse(value));
+                User.addCarbon(carbonFromTransport);
+                User.pushToDatabase();
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Miles by train?',
+            ),
+            validator: (value) {
+              if (value == ""){
+                // do nothing if nothing is entered
+              }
+              else {
+                double carbonFromTransport = calcCarbonFromTransport("train",double.parse(value));
+                User.addCarbon(carbonFromTransport);
+                User.pushToDatabase();
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Miles by plane?',
+            ),
+            validator: (value) {
+              if (value == ""){
+                // do nothing if nothing is entered
+              }
+              else {
+                double carbonFromTransport = calcCarbonFromTransport("plane",double.parse(value));
+                User.addCarbon(carbonFromTransport);
                 User.pushToDatabase();
               }
               return null;
