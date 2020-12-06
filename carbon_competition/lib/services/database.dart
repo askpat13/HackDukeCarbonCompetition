@@ -138,8 +138,8 @@ class LeaderboardEntry {
 
   // NOTE: Less carbon is better.
   int compareTo(LeaderboardEntry other) {
-    if (this.carbon < other.carbon) {return 1;}
-    else if (this.carbon > other.carbon) {return -1;}
+    if (this.carbon > other.carbon) {return 1;}
+    else if (this.carbon < other.carbon) {return -1;}
     else {return 0;}
   }
 }
