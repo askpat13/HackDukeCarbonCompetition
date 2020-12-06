@@ -25,20 +25,13 @@ class CarbonHome extends StatelessWidget {
         UserCard(),
         ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/dailycarbon');}
         , child: Text('Enter your daily carbon data!')),
-        new ListView.builder(
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            User.dataByDay.forEach((day, dailydata) {
-              return new Card(
+              Card(
                 child: const ListTile(
                   leading: const Icon(Icons.nature_outlined),
                   title: Text('Day '),
                   trailing: Text('Carbon '),
                   ),
-                );
-              });
-            },
-          ),
+              ),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),

@@ -165,6 +165,9 @@ class _CarbonForm extends State<CarbonForm> {
               return null;
             },
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget> [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
@@ -174,9 +177,26 @@ class _CarbonForm extends State<CarbonForm> {
                 if (_formKey.currentState.validate()) {
                   // Process data.
                 }
+                showDialog(context: context, child:
+                new AlertDialog(
+                  title: new Text("Your Carbon Usage was:"),
+                  content: new Text('20'),
+                )
+                );
               },
               child: Text('Submit'),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                _formKey.currentState.reset();
+              },
+              child: Text('Reset'),
+            ),
+          ),
+            ],
           ),
         ],
       ),
