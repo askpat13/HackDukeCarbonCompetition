@@ -23,6 +23,7 @@ var foodCarbonConstants = {
   "rice":4.0,
   "wheat":1.4,
   "vegetable":0.7,
+  "none":0,
 };
 
 // Sources: https://www.bieroundtable.com/wp-content/uploads/49d7a0_7a5cfa72d8e74c04be5aeb81f38b136b.pdf
@@ -36,6 +37,7 @@ var drinkCarbonConstants = {
   "spirits":0.123,
   "bottled water":0.042, // bottled water 8oz
   "juice":0.2125, // orange juice, 8oz serving
+  "none":0,
 };
 
 double calcCarbonFromMeals(List<Meal> meals) {

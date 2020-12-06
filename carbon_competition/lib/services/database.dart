@@ -36,6 +36,7 @@ class DatabaseService {
       'name': User.name,
       'zip': User.zip,
       'level': User.level,
+      'icon': User.icon,
       'userMpg': User.userMpg,
       'userAvgDailyHousingCarbon': User.userAvgDailyHousingCarbon,
       'dataByDay': _serialize(User.dataByDay)
@@ -60,6 +61,7 @@ class DatabaseService {
       User.name = doc.data['name'];
       User.level = doc.data['level'];
       User.zip = doc.data['zip'];
+      User.icon = doc.data['icon'];
       User.userMpg = doc.data['userMpg'];
       User.userAvgDailyHousingCarbon = doc.data['userAvgDailyHousingCarbon'];
       User.dataByDay = _deserialize(doc.data['dataByDay']);
@@ -106,7 +108,7 @@ class DatabaseService {
       int today = User.today();
       HashMap<int, DailyData> allDailyData = _deserialize(snapshot.data['dataByDay']);
       DailyData todayData = allDailyData[today];
-      int carbon = todayData.carbonUsage;
+      double carbon = todayData.carbonUsage;
       LeaderboardEntry newEntry = new LeaderboardEntry(name, carbon);
       leaders.add(newEntry);
     }
@@ -133,7 +135,7 @@ Future<bool> checkIfDocExists(String docId, String collectionName) async {
 
 class LeaderboardEntry {
   String name;
-  int carbon;
+  double carbon;
   LeaderboardEntry(this.name, this.carbon);
 
   // NOTE: Less carbon is better.
