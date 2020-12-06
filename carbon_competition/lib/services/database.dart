@@ -60,7 +60,9 @@ class DatabaseService {
       User.zip = doc.data['zip'];
       User.icon = doc.data['icon'];
       User.userMpg = doc.data['userMpg'];
-      User.userAvgDailyHousingCarbon = doc.data['userAvgDailyHousingCarbon'];
+      if (doc.data['userAvgDailyHousingCarbon'] != null) {
+        User.userAvgDailyHousingCarbon = doc.data['userAvgDailyHousingCarbon'];
+      }
       User.dataByDay = _deserialize(doc.data['dataByDay']);
     }
   }
