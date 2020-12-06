@@ -5,6 +5,7 @@ import 'package:carbon_competition/Home.dart';
 import 'package:carbon_competition/Leaderboard.dart';
 import 'package:carbon_competition/Settings.dart';
 import 'package:carbon_competition/user_class.dart';
+import 'package:carbon_competition/carbon_calcs/house_carbon_calc.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -24,6 +25,7 @@ void main() {
     },
   ));
   initializeUser();
+  calcAvgHousingCarbon('10520');
 }
 
 void initializeUser() async {
