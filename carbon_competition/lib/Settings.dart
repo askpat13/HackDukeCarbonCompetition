@@ -49,8 +49,10 @@ class _CarbonForm extends State<CarbonForm> {
                 // code when the user saves the form.
               },
               validator: (String value) {
-                User.name = value;
-                User.pushToDatabase();
+                if (value != "") {
+                  User.name = value;
+                  User.pushToDatabase();
+                }
                 return value.contains('@') ? 'Do not use the @ char.' : null;
               },
             ),
@@ -65,8 +67,10 @@ class _CarbonForm extends State<CarbonForm> {
                 // code when the user saves the form.
               },
               validator: (String value) {
-                User.userMpg = int.parse(value);
-                User.pushToDatabase();
+                if (value != "") {
+                  User.userMpg = int.parse(value);
+                  User.pushToDatabase();
+                }
                 return value.contains('@') ? 'Do not use the @ char.' : null;
               },
             ),
@@ -81,8 +85,10 @@ class _CarbonForm extends State<CarbonForm> {
                 // code when the user saves the form.
               },
               validator: (String value) {
-                User.zip = value;
-                User.pushToDatabase();
+                if (value != "") {
+                  User.zip = value;
+                  User.pushToDatabase();
+                }
                 return value.contains('@') ? 'Do not use the @ char.' : null;
               },
             ),
