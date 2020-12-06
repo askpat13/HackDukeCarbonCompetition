@@ -119,6 +119,15 @@ class DatabaseService {
       LeaderboardEntry newEntry = new LeaderboardEntry(name, carbon, icon);
       leaders.add(newEntry);
     }
+
+    // Manually enter US average and world target
+    double avgUSCarbonPerDay = 16 * 907.185 /365;
+    LeaderboardEntry avgUSPerson = new LeaderboardEntry("Avg US Carbon Footprint", avgUSCarbonPerDay, 2);
+    double avgTargetCarbonPerDay = 2 * 907.185/365;
+    LeaderboardEntry targetPerson = new LeaderboardEntry("Target Global Footprint by 2050", avgTargetCarbonPerDay, 2);
+    leaders.add(avgUSPerson);
+    leaders.add(targetPerson);
+
     documentSnapshots.forEach(addLeader);
 
     // Sort leaders by lowest carbon values
