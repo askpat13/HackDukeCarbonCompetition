@@ -26,12 +26,22 @@ class User {
   static HashMap<int, DailyData> dataByDay = new HashMap<int, DailyData>();
 
   // add carbon (kilograms) to today's entry
-  static void addCarbon(int carbon) {
+  static void addCarbon(double carbon) {
     int dayNo = today();
     if (!dataByDay.containsKey(dayNo)) {
       dataByDay[dayNo] = new DailyData();
     }
     dataByDay[dayNo].addCarbon(carbon);
+  }
+
+  // get carbon (kilograms) for today
+  static double getCarbon(int carbon) {
+    int dayNo = today();
+    if (!dataByDay.containsKey(dayNo)) {
+      return 0;
+    } else {
+      return dataByDay[dayNo].carbonUsage;
+    }
   }
 
   // get a unique integer representing today
