@@ -32,8 +32,8 @@ class Settings extends StatelessWidget {
           TextFormField(
             decoration: const InputDecoration(
               icon: Icon(Icons.circle),
-              hintText: 'What car do you Drive?',
-              labelText: 'Car Type *',
+              hintText: 'What is the mileage per gallon of your car?',
+              labelText: 'Car MPG *',
             ),
             onSaved: (String value) {
               // This optional block of code can be used to run
