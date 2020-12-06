@@ -21,11 +21,8 @@ class Settings extends StatelessWidget {
     }
     return Scaffold(
       appBar: AppBar(
-          title: Center(
-          child:
-           Text('Settings'),
+          title: Text('Settings'),
         ),
-      ),
       body: Column(
         children: [
           Text('Currently your name is ' + name + ', your car Mpg is ' + mpg +
@@ -62,7 +59,7 @@ class _CarbonForm extends State<CarbonForm> {
               decoration: const InputDecoration(
                 icon: Icon(Icons.person),
                 hintText: 'What do people call you?',
-                labelText: 'Name *',
+                labelText: 'Name',
               ),
               onSaved: (String value) {
                 // This optional block of code can be used to run
@@ -80,7 +77,7 @@ class _CarbonForm extends State<CarbonForm> {
               decoration: const InputDecoration(
                 icon: Icon(Icons.directions_car),
                 hintText: 'What is the mileage per gallon of your car?',
-                labelText: 'Car MPG *',
+                labelText: 'Car MPG',
               ),
               onSaved: (String value) {
                 // This optional block of code can be used to run
@@ -98,7 +95,7 @@ class _CarbonForm extends State<CarbonForm> {
               decoration: const InputDecoration(
                 icon: Icon(Icons.house_siding),
                 hintText: 'Where is your location?',
-                labelText: 'ZIP CODE *',
+                labelText: 'ZIP CODE',
               ),
               onSaved: (String value) {
                 // This optional block of code can be used to run

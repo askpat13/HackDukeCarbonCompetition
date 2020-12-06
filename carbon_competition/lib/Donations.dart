@@ -7,11 +7,8 @@ class Donations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child:
-          Text('Donations'),
+        title: Text('Donations'),
         ),
-      ),
       body: MyStatelessWidget(),
       bottomNavigationBar: BottomNavBar(),
     );
