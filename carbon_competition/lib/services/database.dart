@@ -14,15 +14,16 @@ class DatabaseService {
   static final CollectionReference user_data = Firestore.instance.collection('user_data');
   static final CollectionReference carbon_use_data = Firestore.instance.collection('carbon_use_data');
 
+  // send user data to database
   static Future updateUserData(User user) async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
 
     if (await checkIfDocExists(uid, 'user_data')) {
-      print("exists");
+      print("The document exists.");
     } else {
-      print("no");
+      print("The document does not exist.");
     }
 
     return await user_data.document(uid).setData({
@@ -30,16 +31,29 @@ class DatabaseService {
       'user_mpg': user.user_mpg
     });
   }
-}
 
-Future<bool> checkIfDocExists(String docId, String collection_name) async {
-  try {
-    // Get reference to Firestore collection
-    var collectionRef = Firestore.instance.collection(collection_name);
+  // get data from database for user
+  static Future<Map<String, dynamic>> getUserData() async {
+    if (await checkIfDocExists(uid, 'user_data')) {
+      DocumentReference doc = user_data.document(uid);
+      DocumentSnapshot snapshot = await doc.get();
+      Map<String, dynamic> data = snapshot.data;
+      return data;
+    } else {
+      print("Document does not exist.");
+      return null;
+    }
+  }
 
-    var doc = await collectionRef.document(docId).get();
-    return doc.exists;
-  } catch (e) {
-    return false;
+  static Future<bool> checkIfDocExists(String docId, String collection_name) async {
+    try {
+      // Get reference to Firestore collection
+      var collectionRef = Firestore.instance.collection(collection_name);
+
+      var doc = await collectionRef.document(docId).get();
+      return doc.exists;
+    } catch (e) {
+      return false;
+    }
   }
 }
