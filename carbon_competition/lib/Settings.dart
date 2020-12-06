@@ -2,6 +2,7 @@ import 'package:carbon_competition/user_class.dart';
 import 'package:flutter/material.dart';
 import 'BottomNavBar.dart';
 import 'package:carbon_competition/main.dart';
+import 'package:carbon_competition/carbon_calcs/house_carbon_calc.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -87,6 +88,7 @@ class _CarbonForm extends State<CarbonForm> {
               validator: (String value) {
                 if (value != "") {
                   User.zip = value;
+                  User.userAvgDailyHousingCarbon = calcAvgHousingCarbon(value);
                   User.pushToDatabase();
                 }
                 return value.contains('@') ? 'Do not use the @ char.' : null;

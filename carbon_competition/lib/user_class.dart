@@ -10,13 +10,14 @@ class User {
   // TODO: user weight
   //int user_weight; //lbs
 
-  static String name = "";
+  static String name = "User";
   static String zip = "";
+  static int level = 0;
 
   // TODO: input in different units
   // static int userHeatAvg = 0; //dollars
 
-  static int userAvgDailyHousingCarbon = 0;
+  static double userAvgDailyHousingCarbon = 0;
 
   // TODO: multiple cars
   static int userMpg = 0;
@@ -51,6 +52,7 @@ class User {
   static void printUser() {
     print("Average Daily Housing Carbon $userAvgDailyHousingCarbon");
     print("Miles Per Gallon $userMpg");
+    print("User Level $level");
 
     printDailyData(day, data) {
       print("Day $day");
