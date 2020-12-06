@@ -43,6 +43,8 @@ class DatabaseService {
 
     // update database
     return await userData.document(uid).setData({
+      'name': User.name,
+      'zip': User.zip,
       'userHeatAvg': User.userHeatAvg,
       'userMpg': User.userMpg,
       'dataByDay': serializedData
@@ -64,6 +66,8 @@ class DatabaseService {
       DocumentSnapshot doc = await collectionRef.document(uid).get();
 
       // Update user data
+      User.name = doc.data['name'];
+      User.zip = doc.data['zip'];
       User.userMpg = doc.data['userMpg'];
       User.userHeatAvg = doc.data['userHeatAvg'];
 

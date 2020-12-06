@@ -10,6 +10,9 @@ class User {
   // TODO: user weight
   //int user_weight; //lbs
 
+  static String name = "";
+  static String zip = "";
+
   // TODO: input in different units
   static int userHeatAvg = 0; //dollars
 
@@ -46,6 +49,11 @@ class User {
   static void printUser() {
     print("Heat Average $userHeatAvg");
     print("Miles Per Gallon $userMpg");
-    print(dataByDay);
+
+    printDailyData(day, data) {
+      print("Day $day");
+      data.printDailyData();
+    }
+    dataByDay.forEach(printDailyData);
   }
 }

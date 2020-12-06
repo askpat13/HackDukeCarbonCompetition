@@ -25,7 +25,7 @@ void main() {
 }
 
 void initializeUser() async {
-  User.addCarbon(500);
   await User.pullFromDatabase();
+  User.addCarbon(600);
   User.printUser();
 }
