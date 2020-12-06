@@ -27,13 +27,13 @@ class CarbonHome extends StatelessWidget {
         UserCard(),
         ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/dailycarbon');}
         , child: Text('Enter your daily carbon data!')),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.nature_outlined),
-                  title: Text(DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now()).toString()),
-                  trailing: Text(User.getCarbon().toString()),
-                  ),
-              ),
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.nature_outlined),
+            title: Text(DateFormat('yyyy-MM-dd').format(DateTime.now()).toString()),
+            trailing: Text(User.getCarbon().toString()),
+          ),
+        ),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),
