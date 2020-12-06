@@ -21,8 +21,11 @@ void main() {
       '/settings': (settingsContext) => Settings()
     },
   ));
-  User default_user = new User(100,120);
-  default_user.pullFromDatabase();
-  print("Post pull");
-  print(default_user.user_mpg);
+  initializeUser();
+}
+
+void initializeUser() async {
+  User default_user = new User(69,420);
+  await default_user.pullFromDatabase();
+  default_user.printUser();
 }

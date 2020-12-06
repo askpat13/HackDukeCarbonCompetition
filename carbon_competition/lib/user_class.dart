@@ -1,4 +1,5 @@
 import "package:carbon_competition/services/database.dart";
+import 'package:flutter/rendering.dart';
 
 class User {
   // TODO: user weight
@@ -12,12 +13,16 @@ class User {
 
   User(this.user_heat_avg, this.user_mpg);
 
-  void updateDatabase() {
-
-    DatabaseService.updateUserData(this);
+  Future<void> updateDatabase() async {
+    await DatabaseService.updateUserData(this);
   }
 
-  void pullFromDatabase() {
-    DatabaseService.pullUserData(this);
+  Future<void> pullFromDatabase() async {
+    await DatabaseService.pullUserData(this);
+  }
+
+  void printUser() {
+    print("Heat Average $user_heat_avg");
+    print("Miles Per Gallon $user_mpg");
   }
 }
