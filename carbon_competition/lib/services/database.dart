@@ -13,8 +13,7 @@ class DatabaseService {
   // collection reference
   static final CollectionReference userData = Firestore.instance.collection(
       'userData');
-  static final CollectionReference carbonUseData = Firestore.instance
-      .collection('carbonUseData');
+  static QuerySnapshot querySnapshot;
 
   // send user data to database
   static Future<void> pushUserData() async {
@@ -42,6 +41,7 @@ class DatabaseService {
 
   // get data from database for user
   static Future<void> pullUserData() async {
+
     if (uid == null) {
       uid = await getDeviceUuid();
     }
@@ -49,10 +49,12 @@ class DatabaseService {
     // If file exists, grab data from
     if (await checkIfDocExists(uid, 'userData')) {
       print("Document exists, pulling.");
-      CollectionReference collectionRef = Firestore.instance.collection(
-          'userData');
 
-      DocumentSnapshot doc = await collectionRef.document(uid).get();
+      // Store a snapshot in memory of all user documents
+      querySnapshot = await userData.getDocuments();
+
+      // Get the document for this user
+      DocumentSnapshot doc = await userData.document(uid).get();
 
       // Update user data
       User.name = doc.data['name'];
@@ -94,10 +96,9 @@ class DatabaseService {
   }
 
   // get top users from leaderboard
-  static Future<List<LeaderboardEntry>> getTopScores() async {
+  static List<LeaderboardEntry> getTopScores() {
     // Get list of all user documents
     CollectionReference collectionRef = Firestore.instance.collection('userData');
-    QuerySnapshot querySnapshot = await collectionRef.getDocuments();
     List<DocumentSnapshot> documentSnapshots = querySnapshot.documents;
 
     // Create a list of sortable LeaderboardEntries.
@@ -108,10 +109,14 @@ class DatabaseService {
       HashMap<int, DailyData> dataByDay = _deserialize(snapshot.data['dataByDay']);
       DailyData todayData = dataByDay[today];
       double carbon = 0;
-      if (todayData != null) {
-        double carbon = todayData.carbonUsage;
+      int icon = snapshot.data['icon'];
+      if (icon == null) {
+        icon = 0;
       }
-      LeaderboardEntry newEntry = new LeaderboardEntry(name, carbon);
+      if (todayData != null) {
+        carbon = todayData.carbonUsage;
+      }
+      LeaderboardEntry newEntry = new LeaderboardEntry(name, carbon, icon);
       leaders.add(newEntry);
     }
     documentSnapshots.forEach(addLeader);
@@ -138,7 +143,8 @@ Future<bool> checkIfDocExists(String docId, String collectionName) async {
 class LeaderboardEntry {
   String name;
   double carbon;
-  LeaderboardEntry(this.name, this.carbon);
+  int icon;
+  LeaderboardEntry(this.name, this.carbon, this.icon);
 
   // NOTE: Less carbon is better.
   int compareTo(LeaderboardEntry other) {
