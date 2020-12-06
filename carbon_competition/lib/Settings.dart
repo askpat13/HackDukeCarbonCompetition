@@ -10,13 +10,13 @@ class Settings extends StatelessWidget {
   var zip = '[BLANK]';
   @override
   Widget build(BuildContext context) {
-    if (User.name != '') {
+    if (User.name != null) {
       name = User.name;
     }
-    if (User.userMpg.toString() != '') {
+    if (User.userMpg.toString() != null) {
       mpg = User.userMpg.toString();
     }
-    if (User.zip != '') {
+    if (User.zip != null) {
       zip = User.zip;
     }
     return Scaffold(
