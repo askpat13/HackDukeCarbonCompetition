@@ -34,31 +34,31 @@ var drinkCarbonConstants = {
   "soda":0.2, // per drink
   "beer":0.330,
   "wine":0.275,
-  "spirits":0.123,
+  "spirit":0.123,
   "bottled water":0.042, // bottled water 8oz
   "juice":0.2125, // orange juice, 8oz serving
   "none":0,
 };
 
-double calcCarbonFromMeals(List<Meal> meals) {
-  // TODO: don't assume 2000 calories
-
-  // Add carbon for all meals
-  double mealsCarbonUsed = 0;
-  for (int ii = 0; ii < meals.length; ii++) {
-    Meal currentMeal = meals[ii];
-
-    // Calculate carbon contribution of primary makeup
-    mealsCarbonUsed += calcCarbonFromPrimary(currentMeal.primaryType);
-
-    // Calculate carbon contribution of side makeup
-    mealsCarbonUsed += calcCarbonFromSide(currentMeal.sideType);
-
-    // Calculate carbon contribution of drink makeup
-    mealsCarbonUsed += calcCarbonFromDrink(currentMeal.mealDrinks);
-  }
-  return mealsCarbonUsed;
-}
+// double calcCarbonFromMeals(List<Meal> meals) {
+//   // TODO: don't assume 2000 calories
+//
+//   // Add carbon for all meals
+//   double mealsCarbonUsed = 0;
+//   for (int ii = 0; ii < meals.length; ii++) {
+//     Meal currentMeal = meals[ii];
+//
+//     // Calculate carbon contribution of primary makeup
+//     mealsCarbonUsed += calcCarbonFromPrimary(currentMeal.primaryType);
+//
+//     // Calculate carbon contribution of side makeup
+//     mealsCarbonUsed += calcCarbonFromSide(currentMeal.sideType);
+//
+//     // Calculate carbon contribution of drink makeup
+//     mealsCarbonUsed += calcCarbonFromDrink(currentMeal.mealDrinks);
+//   }
+//   return mealsCarbonUsed;
+// }
 
 double calcCarbonFromPrimary(String primaryType) {
   // Meat serving source: https://calculate-this.com/meat-person-calculator
@@ -76,19 +76,6 @@ double calcCarbonFromSide(String sideType) {
   return foodCarbonPerKg * standardServingKg;
 }
 
-double calcCarbonFromDrink(Drink drink) {
-  double drinkCarbonPerKg = drinkCarbonConstants[drink.drinkType];
-
-  return drinkCarbonPerKg * drink.numDrinks;
-}
-
-// Testing functionality
-void main() {
-  Drink drink1 = new Drink("beer",1);
-  Drink drink2 = new Drink("juice", 2);
-  Meal meal1 = new Meal("beef", "vegetable", drink1);
-  Meal meal2 = new Meal("poultry", "vegetable", drink2);
-  List<Meal> meals = [meal1, meal2];
-
-  print(calcCarbonFromMeals(meals));
+double calcCarbonFromDrink(String drinkType) {
+  return drinkCarbonConstants[drinkType];
 }
