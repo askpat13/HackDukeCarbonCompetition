@@ -7,28 +7,17 @@ var transportCarbonConstants = {
   "car":8.887, // kg carbon per gallon burned
   "bus":0.104, //kg carbon per km
   "coach bus":0.027, //kg carbon per km
-  "subway":0.041, //kg carbon per km
-  "electric train":0.006, //kg carbon per km
+  "train":0.041, //kg carbon per km
   "plane":0.225, //kg per km
+  "electric train":0.006, //kg per km
 };
 
-double calcCarbonFromMiles(Map<String, int> miles, User user) {
+double calcCarbonFromTransport(String transportType, double mileCount) {
   double milesToKm = 1.60934;
 
-  double milesCarbonUsed = 0;
-  for (MapEntry<String, int> trans_info in miles.entries) {
-    String transportMode = trans_info.key;
-    int mileCount = trans_info.value;
-    if (transportMode != "car"){
-      milesCarbonUsed +=
-          transportCarbonConstants[transportMode] * milesToKm * mileCount;
-    }
-    // Cars use kg/gallon, so we use different calc.
-    else {
-      milesCarbonUsed +=
-          (transportCarbonConstants[transportMode] * mileCount) / User.userMpg;
-    }
-  }
+  return transportCarbonConstants[transportType] * milesToKm * mileCount;
+}
 
-  return milesCarbonUsed;
+double calcCarbonFromCar(double mileCount) {
+  return (transportCarbonConstants["car"] * mileCount) / User.userMpg;
 }

@@ -106,9 +106,12 @@ class DatabaseService {
     addLeader(snapshot) {
       String name = snapshot.data['name'];
       int today = User.today();
-      HashMap<int, DailyData> allDailyData = _deserialize(snapshot.data['dataByDay']);
-      DailyData todayData = allDailyData[today];
-      double carbon = todayData.carbonUsage;
+      HashMap<int, DailyData> dataByDay = _deserialize(snapshot.data['dataByDay']);
+      DailyData todayData = dataByDay[today];
+      double carbon = 0;
+      if (todayData != null) {
+        double carbon = todayData.carbonUsage;
+      }
       LeaderboardEntry newEntry = new LeaderboardEntry(name, carbon);
       leaders.add(newEntry);
     }

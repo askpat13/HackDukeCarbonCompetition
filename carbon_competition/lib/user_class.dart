@@ -11,7 +11,7 @@ class User {
   //int user_weight; //lbs
 
   static String name = "User";
-  static String zip = "";
+  static String zip = "0";
   static int level = 0;
   static int icon = 0;
 
@@ -30,6 +30,15 @@ class User {
       dataByDay[dayNo] = new DailyData();
     }
     dataByDay[dayNo].addCarbon(carbon);
+  }
+
+  // reset today's carbon (kilograms) to zero
+  static void resetCarbon() {
+    int dayNo = today();
+    if (!dataByDay.containsKey(dayNo)) {
+      dataByDay[dayNo] = new DailyData();
+    }
+    dataByDay[dayNo].carbonUsage = 0.0;
   }
 
   // get carbon (kilograms) for today
