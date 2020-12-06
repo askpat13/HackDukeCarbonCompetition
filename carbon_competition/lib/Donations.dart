@@ -9,7 +9,14 @@ class Donations extends StatelessWidget {
       appBar: AppBar(
         title: Text('Donations'),
         ),
-      body: MyStatelessWidget(),
+      body: Column(
+          children: [
+            Text('If you are feeling generous and want to reduce the impact of ' +
+                'your carbon footprint please feel free to donate to any of the charities below:',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+            MyStatelessWidget(),
+          ],
+      ),
       bottomNavigationBar: BottomNavBar(),
     );
   }
