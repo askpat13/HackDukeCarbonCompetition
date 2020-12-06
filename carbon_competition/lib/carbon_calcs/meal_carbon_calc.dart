@@ -15,9 +15,10 @@ class Drink {
 
 // Source: https://ourworldindata.org/food-choice-vs-eating-local
 var foodCarbonConstants = {
-  "beef":60.0, // per kg
+  "beef":60.0, // kg per kg
   "lamb":24.0,
   "pork":7.0,
+  "dairy":21.0,
   "poultry":6.0,
   "rice":4.0,
   "wheat":1.4,
