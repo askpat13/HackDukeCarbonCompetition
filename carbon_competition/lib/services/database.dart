@@ -45,7 +45,7 @@ class DatabaseService {
     return await userData.document(uid).setData({
       'name': User.name,
       'zip': User.zip,
-      'userHeatAvg': User.userHeatAvg,
+      'userAvgDailyHousingCarbon': User.userAvgDailyHousingCarbon,
       'userMpg': User.userMpg,
       'dataByDay': serializedData
     });
@@ -69,7 +69,7 @@ class DatabaseService {
       User.name = doc.data['name'];
       User.zip = doc.data['zip'];
       User.userMpg = doc.data['userMpg'];
-      User.userHeatAvg = doc.data['userHeatAvg'];
+      User.userAvgDailyHousingCarbon = doc.data['userAvgDailyHousingCarbon'];
 
       // Update day-by-day data (convert back to HashMap)
       //HashMap<String, HashMap<String, dynamic>> serializedData = HashMap<String, dynamic>.from(doc.data['dataByDay']);

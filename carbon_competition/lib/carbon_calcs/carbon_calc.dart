@@ -11,7 +11,7 @@ double calcDailyCarbonUsed(Map<String, int> miles, List<Meal> meals, User user) 
 
   // Add carbon from heating for the day
   // TODO: calculate daily heating based on time of year
-//   carbonUsed += user.user_heat_avg;
+  carbonUsed += User.userAvgDailyHousingCarbon;
 
   // Add carbon from meals
   carbonUsed += calcCarbonFromMeals(meals);

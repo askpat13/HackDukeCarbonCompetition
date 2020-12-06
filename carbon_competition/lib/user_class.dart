@@ -14,7 +14,9 @@ class User {
   static String zip = "";
 
   // TODO: input in different units
-  static int userHeatAvg = 0; //dollars
+  // static int userHeatAvg = 0; //dollars
+
+  static int userAvgDailyHousingCarbon = 0;
 
   // TODO: multiple cars
   static int userMpg = 0;
@@ -47,7 +49,7 @@ class User {
   }
 
   static void printUser() {
-    print("Heat Average $userHeatAvg");
+    print("Average Daily Housing Carbon $userAvgDailyHousingCarbon");
     print("Miles Per Gallon $userMpg");
 
     printDailyData(day, data) {
