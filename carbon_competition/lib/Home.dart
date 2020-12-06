@@ -6,7 +6,8 @@ class CarbonHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Home Page'),
+          title: Text('Carbon Crushers!'),
+
           actions: <Widget> [
             IconButton(
               icon: Icon(Icons.settings),
