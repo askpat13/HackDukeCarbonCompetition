@@ -1,7 +1,7 @@
 import 'package:carbon_competition/user_class.dart';
 import 'package:flutter/material.dart';
 import 'BottomNavBar.dart';
-import 'package:carbon_competition/main.dart';
+import 'package:carbon_competition/Home.dart';
 import 'package:carbon_competition/carbon_calcs/house_carbon_calc.dart';
 
 class Settings extends StatelessWidget {
@@ -116,6 +116,10 @@ class _CarbonForm extends State<CarbonForm> {
               onPressed: () {
               // Validate will return true if the form is valid, or false if
               // the form is invalid.
+              Navigator.push(
+              context,
+                MaterialPageRoute(builder: (context) => CarbonHome()),
+              );
               if (_formKey.currentState.validate()) {
               // Process data.
               }
