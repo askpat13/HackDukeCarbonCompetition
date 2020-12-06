@@ -17,7 +17,8 @@ class Leaderboard extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(top: 10),
 
-          ListTile(leading: Icon(Icons.more_vert), title: Text("User Pic here"),
+          ListTile(
+            : Icon(Icons.more_vert), title: Text("images/assets"),
             alignment: Alignment(-0.9, 3.0),
             height: 50,
             width: 50),
