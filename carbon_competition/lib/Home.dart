@@ -30,7 +30,9 @@ class CarbonHome extends StatelessWidget {
         Card(
           child: ListTile(
             leading: Icon(Icons.nature_outlined),
-            title: Text(DateFormat('yyyy-MM-dd').format(DateTime.now()).toString()),
+            title: Text(DateTime.now().month.toString() + "/" +
+                DateTime.now().day.toString() + "/" +
+                DateTime.now().year.toString()),
             trailing: Text(User.getCarbon().toString()),
           ),
         ),
