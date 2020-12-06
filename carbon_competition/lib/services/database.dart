@@ -18,9 +18,9 @@ class DatabaseService {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
-    if (user_data.document(uid).exists) {
+    //if (user_data.document(uid).exists) {
 
-    }
+    //}
     return await user_data.document(uid).setData({
       'user_heat_avg': user.user_heat_avg,
       'user_mpg': user.user_mpg
