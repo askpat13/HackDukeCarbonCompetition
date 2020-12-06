@@ -62,7 +62,7 @@ class UserCard extends StatelessWidget {
          child: Column(
            children: <Widget> [
              Text('Username'),
-             Text('lvl 1')
+             Text('lvl 1'),
            ],
          ),
      decoration: new BoxDecoration(
