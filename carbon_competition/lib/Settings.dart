@@ -1,5 +1,7 @@
+import 'package:carbon_competition/user_class.dart';
 import 'package:flutter/material.dart';
 import 'BottomNavBar.dart';
+import 'package:carbon_competition/main.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -59,6 +61,8 @@ class _CarbonForm extends State<CarbonForm> {
               onSaved: (String value) {
                 // This optional block of code can be used to run
                 // code when the user saves the form.
+                User.userMpg = int.parse(value);
+                User.pushToDatabase();
               },
               validator: (String value) {
                 return value.contains('@') ? 'Do not use the @ char.' : null;

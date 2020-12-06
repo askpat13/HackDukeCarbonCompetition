@@ -26,17 +26,9 @@ double calcCarbonFromMiles(Map<String, int> miles, User user) {
     // Cars use kg/gallon, so we use different calc.
     else {
       milesCarbonUsed +=
-          (transportCarbonConstants[transportMode] * mileCount) / user.userMpg;
+          (transportCarbonConstants[transportMode] * mileCount) / User.userMpg;
     }
   }
 
   return milesCarbonUsed;
-}
-
-// Testing functionality
-void main() {
-  User user = new User(50, 30);
-  Map<String, int> miles = {"car":50,"plane":500};
-
-  print(calcCarbonFromMiles(miles, user));
 }

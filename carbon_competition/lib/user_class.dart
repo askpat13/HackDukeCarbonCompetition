@@ -11,47 +11,41 @@ class User {
   //int user_weight; //lbs
 
   // TODO: input in different units
-  int userHeatAvg; //dollars
+  static int userHeatAvg = 0; //dollars
 
   // TODO: multiple cars
-  int userMpg;
+  static int userMpg = 0;
 
   // daily data
-  HashMap<int, DailyData> dataByDay;
-
-  // constructor
-  User(this.userHeatAvg, this.userMpg) {
-    this.dataByDay = new HashMap<int, DailyData>();
-  }
+  static HashMap<int, DailyData> dataByDay = new HashMap<int, DailyData>();
 
   // add carbon (kilograms) to today's entry
-  void addCarbon(int carbon) {
+  static void addCarbon(int carbon) {
     int dayNo = today();
     if (!dataByDay.containsKey(dayNo)) {
       dataByDay[dayNo] = new DailyData();
     }
     dataByDay[dayNo].addCarbon(carbon);
-    int newCarbon = dataByDay[dayNo].carbonUsage;
   }
 
   // get a unique integer representing today
-  int today() {
+  static int today() {
     DateTime now = new DateTime.now();
     int dayNo = ((now.year - 2000) * 500) + (now.month * 32) + now.day;
     return dayNo;
   }
 
-  Future<void> pushToDatabase() async {
-    await DatabaseService.pushUserData(this);
+  static Future<void> pushToDatabase() async {
+    await DatabaseService.pushUserData();
   }
 
-  Future<void> pullFromDatabase() async {
-    await DatabaseService.pullUserData(this);
+  static Future<void> pullFromDatabase() async {
+    await DatabaseService.pullUserData();
   }
 
-  void printUser() {
+  static void printUser() {
     print("Heat Average $userHeatAvg");
     print("Miles Per Gallon $userMpg");
-    //dataByDay.forEach((k,v) => {print(k,v)});
+    print(dataByDay);
   }
 }

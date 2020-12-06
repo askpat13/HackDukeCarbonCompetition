@@ -21,15 +21,3 @@ double calcDailyCarbonUsed(Map<String, int> miles, List<Meal> meals, User user) 
 
   return carbonUsed;
 }
-
-void main() {
-  Map<String, int> miles = {"plane":100};
-
-  Drink drink = new Drink("beer",1);
-  Meal meal1 = new Meal("beef", "vegetable", drink);
-  Meal meal2 = new Meal("poultry", "vegetable", drink);
-  User user = new User(50, 30);
-  List<Meal> meals = [meal1, meal2];
-
-  print(calcDailyCarbonUsed(miles, meals, user));
-}

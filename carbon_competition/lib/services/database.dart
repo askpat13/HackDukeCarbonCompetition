@@ -20,7 +20,7 @@ class DatabaseService {
       .collection('carbonUseData');
 
   // send user data to database
-  static Future<void> pushUserData(User user) async {
+  static Future<void> pushUserData() async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
@@ -33,24 +33,24 @@ class DatabaseService {
 
     // Convert dataByDay to a serializable type
     HashMap<String, HashMap<String, dynamic>> serializedData = new HashMap<String, HashMap<String, dynamic>>();
-    serialize(k, v) {
-      String index = k.toString();
+    serialize(day, dailyData) {
+      String index = day.toString();
       serializedData[index] = new HashMap<String, dynamic>();
-      serializedData[index]['carbonUsage'] = user.dataByDay[k].carbonUsage;
+      serializedData[index]['carbonUsage'] = User.dataByDay[day].carbonUsage;
     }
-    user.dataByDay.forEach(serialize);
+    User.dataByDay.forEach(serialize);
     print(serializedData);
 
     // update database
     return await userData.document(uid).setData({
-      'userHeatAvg': user.userHeatAvg,
-      'userMpg': user.userMpg,
+      'userHeatAvg': User.userHeatAvg,
+      'userMpg': User.userMpg,
       'dataByDay': serializedData
     });
   }
 
   // get data from database for user
-  static Future<void> pullUserData(User user) async {
+  static Future<void> pullUserData() async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
@@ -64,19 +64,20 @@ class DatabaseService {
       DocumentSnapshot doc = await collectionRef.document(uid).get();
 
       // Update user data
-      user.userMpg = doc.data['userMpg'];
-      user.userHeatAvg = doc.data['userHeatAvg'];
+      User.userMpg = doc.data['userMpg'];
+      User.userHeatAvg = doc.data['userHeatAvg'];
 
       // Update day-by-day data (convert back to HashMap)
+      //HashMap<String, HashMap<String, dynamic>> serializedData = HashMap<String, dynamic>.from(doc.data['dataByDay']);
       HashMap<String, dynamic> serializedData = HashMap<String, dynamic>.from(doc.data['dataByDay']);
       HashMap<int, DailyData> dataByDay;
-      deserialize(k, v) {
-        int index = int.parse(k);
+      deserialize(day, dailyData) {
+        int index = int.parse(day);
         dataByDay = new HashMap<int, DailyData>();
-        dataByDay[index] = new DailyData(v['carbonUsage']);
+        dataByDay[index] = new DailyData(dailyData['carbonUsage']);
       }
       serializedData.forEach(deserialize);
-      user.dataByDay = dataByDay;
+      User.dataByDay = dataByDay;
 
     } else {
       print("Document does not exist, cannot pull.");
