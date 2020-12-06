@@ -26,10 +26,10 @@ class CarbonHome extends StatelessWidget {
         ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/dailycarbon');}
         , child: Text('Enter your daily carbon data!')),
               Card(
-                child: const ListTile(
-                  leading: const Icon(Icons.nature_outlined),
-                  title: Text('Day '),
-                  trailing: Text('Carbon '),
+                child: ListTile(
+                  leading: Icon(Icons.nature_outlined),
+                  title: Text(DateTime.now().toString()),
+                  trailing: Text(User.getCarbon().toString()),
                   ),
               ),
         ],
@@ -63,7 +63,6 @@ class UserCard extends StatelessWidget {
               children: <Widget>[
                 Text(name),
                 Text('Lvl 1'),
-                Text('Your carbon output today was ' + '2' + ' lbs.'),
               ],
             ),
             decoration: new BoxDecoration(
@@ -88,7 +87,7 @@ class UserCard extends StatelessWidget {
  final avatarThumbnail = new Container(
    alignment: Alignment.topCenter,
      child: new Image(
-       image: new AssetImage("assets/images/pixeldude1.png"),
+       image: new AssetImage("assets/images/0.png"),
        height: 66,
        width: 66,
      ),

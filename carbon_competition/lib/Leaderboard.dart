@@ -13,29 +13,17 @@ class Leaderboard extends StatelessWidget {
         ),
       ),
       body: ListView(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 10),
-
-          ListTile(
-            : Icon(Icons.more_vert), title: Text("images/assets"),
-            alignment: Alignment(-0.9, 3.0),
-            height: 50,
-            width: 50),
-
-
-            ListTile(
-              subtitle: Text("Username"),
-              trailing: Text("Points"),)
-        )
-    ])
-  }
-
-
-
-
-
-
+          children: <Widget>[
+            ListTile(leading: new Image(
+                image: AssetImage('assets/images/1.png'),
+              alignment: Alignment(-0.9, 3.0),
+              height: 50,
+              width: 50),
+              title: Text("Username"),
+              subtitle: Text("Points"),
+            ),
+          ]
+      ),
       bottomNavigationBar: BottomNavBar(),
     );
   }
