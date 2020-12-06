@@ -12,7 +12,6 @@ class User {
 
   static String name = "User";
   static String zip = "0";
-  static int level = 0;
   static int icon = 0;
 
   static double userAvgDailyHousingCarbon = 0;
@@ -39,6 +38,11 @@ class User {
       dataByDay[dayNo] = new DailyData();
     }
     dataByDay[dayNo].carbonUsage = User.userAvgDailyHousingCarbon;
+  }
+
+  // get level (number of days playing)
+  static int getLevel() {
+    return dataByDay.length;
   }
 
   // get carbon (kilograms) for today
@@ -69,7 +73,7 @@ class User {
   static void printUser() {
     print("Average Daily Housing Carbon $userAvgDailyHousingCarbon");
     print("Miles Per Gallon $userMpg");
-    print("User Level $level");
+    print("User Level ${getLevel()}");
 
     printDailyData(day, data) {
       print("Day $day");

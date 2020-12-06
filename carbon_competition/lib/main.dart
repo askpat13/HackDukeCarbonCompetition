@@ -26,6 +26,7 @@ void main() {
       '/dailycarbon': (carbonContext) => CarbonTracker()
     },
   ));
+
   initializeUser();
 }
 

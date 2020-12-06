@@ -31,7 +31,6 @@ class DatabaseService {
     return await userData.document(uid).setData({
       'name': User.name,
       'zip': User.zip,
-      'level': User.level,
       'icon': User.icon,
       'userMpg': User.userMpg,
       'userAvgDailyHousingCarbon': User.userAvgDailyHousingCarbon,
@@ -58,7 +57,6 @@ class DatabaseService {
 
       // Update user data
       User.name = doc.data['name'];
-      User.level = doc.data['level'];
       User.zip = doc.data['zip'];
       User.icon = doc.data['icon'];
       User.userMpg = doc.data['userMpg'];

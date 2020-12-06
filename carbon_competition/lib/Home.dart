@@ -44,7 +44,7 @@ class CarbonHome extends StatelessWidget {
 }
 
 class UserCard extends StatelessWidget {
-  var name = "User";
+  String name = "User";
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class UserCard extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(name),
-                Text('Lvl 1'),
+                Text('Lvl ${User.getLevel()}'),
               ],
             ),
             decoration: new BoxDecoration(
@@ -91,7 +91,7 @@ class UserCard extends StatelessWidget {
  final avatarThumbnail = new Container(
    alignment: Alignment.topCenter,
      child: new Image(
-       image: new AssetImage("assets/images/0.png"),
+       image: new AssetImage("assets/images/${User.icon}.png"),
        height: 66,
        width: 66,
      ),
