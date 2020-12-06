@@ -38,7 +38,7 @@ class User {
     if (!dataByDay.containsKey(dayNo)) {
       dataByDay[dayNo] = new DailyData();
     }
-    dataByDay[dayNo].carbonUsage = 0.0;
+    dataByDay[dayNo].carbonUsage = User.userAvgDailyHousingCarbon;
   }
 
   // get carbon (kilograms) for today

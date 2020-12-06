@@ -191,6 +191,7 @@ class _CarbonForm extends State<CarbonForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
+                User.resetCarbon();
                 _formKey.currentState.reset();
               },
               child: Text('Reset'),
