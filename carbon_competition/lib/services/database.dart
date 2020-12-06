@@ -18,12 +18,28 @@ class DatabaseService {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
-    if (user_data.document(uid).exists) {
 
+    if (await checkIfDocExists(uid, 'user_data')) {
+      print("exists");
+    } else {
+      print("no");
     }
+
     return await user_data.document(uid).setData({
       'user_heat_avg': user.user_heat_avg,
       'user_mpg': user.user_mpg
     });
+  }
+}
+
+Future<bool> checkIfDocExists(String docId, String collection_name) async {
+  try {
+    // Get reference to Firestore collection
+    var collectionRef = Firestore.instance.collection(collection_name);
+
+    var doc = await collectionRef.document(docId).get();
+    return doc.exists;
+  } catch (e) {
+    return false;
   }
 }

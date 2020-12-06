@@ -21,6 +21,6 @@ void main() {
       '/settings': (settingsContext) => Settings()
     },
   ));
-  User test_user = new User(55, 105);
+  User test_user = new User(5, 7);
   test_user.updateDatabase();
 }
