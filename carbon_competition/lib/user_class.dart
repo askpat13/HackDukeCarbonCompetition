@@ -1,20 +1,28 @@
 import "package:carbon_competition/services/database.dart";
 import 'package:flutter/rendering.dart';
 
+import 'daily_class.dart';
+
 class User {
   // TODO: user weight
   //int user_weight; //lbs
 
   // TODO: input in different units
-  int user_heat_avg; //dollars
+  int userHeatAvg; //dollars
 
   // TODO: multiple cars
-  int user_mpg;
+  int userMpg;
 
-  User(this.user_heat_avg, this.user_mpg);
+  // daily data
+  Map<int, DailyData> dataByDay;
 
-  Future<void> updateDatabase() async {
-    await DatabaseService.updateUserData(this);
+  // constructor
+  User(this.userHeatAvg, this.userMpg) {
+    this.dataByDay = new Map<int, DailyData>();
+  }
+
+  Future<void> pushToDatabase() async {
+    await DatabaseService.pushUserData(this);
   }
 
   Future<void> pullFromDatabase() async {
@@ -22,7 +30,7 @@ class User {
   }
 
   void printUser() {
-    print("Heat Average $user_heat_avg");
-    print("Miles Per Gallon $user_mpg");
+    print("Heat Average $userHeatAvg");
+    print("Miles Per Gallon $userMpg");
   }
 }

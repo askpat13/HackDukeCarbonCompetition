@@ -25,7 +25,7 @@ void main() {
 }
 
 void initializeUser() async {
-  User default_user = new User(69,420);
+  User default_user = new User(123,456);
   await default_user.pullFromDatabase();
   default_user.printUser();
 }

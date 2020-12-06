@@ -17,7 +17,7 @@ class DatabaseService {
       .collection('carbon_use_data');
 
   // send user data to database
-  static Future<void> updateUserData(User user) async {
+  static Future<void> pushUserData(User user) async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
@@ -29,8 +29,9 @@ class DatabaseService {
     }
 
     return await user_data.document(uid).setData({
-      'user_heat_avg': user.user_heat_avg,
-      'user_mpg': user.user_mpg
+      'user_heat_avg': user.userHeatAvg,
+      'user_mpg': user.userMpg,
+      'data_by_day': user.dataByDay
     });
   }
 
@@ -49,8 +50,9 @@ class DatabaseService {
       DocumentSnapshot doc = await collectionRef.document(uid).get();
 
       // Update
-      user.user_mpg = doc.data['user_mpg'];
-      user.user_heat_avg = doc.data['user_heat_avg'];
+      user.userMpg = doc.data['user_mpg'];
+      user.userHeatAvg = doc.data['user_heat_avg'];
+      user.dataByDay = doc.data['data_by_day'];
     } else {
       print("Document does not exist, cannot pull.");
     }
