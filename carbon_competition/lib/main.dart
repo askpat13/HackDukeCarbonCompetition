@@ -21,6 +21,8 @@ void main() {
       '/settings': (settingsContext) => Settings()
     },
   ));
-  User test_user = new User(5, 7);
-  test_user.updateDatabase();
+  User default_user = new User(100,120);
+  default_user.pullFromDatabase();
+  print("Post pull");
+  print(default_user.user_mpg);
 }

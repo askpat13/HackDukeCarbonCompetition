@@ -21,7 +21,9 @@ class DatabaseService {
 
     if (await checkIfDocExists(uid, 'user_data')) {
       print("exists");
-    } else {
+    }
+    // If file
+    else {
       print("no");
     }
 
@@ -30,14 +32,44 @@ class DatabaseService {
       'user_mpg': user.user_mpg
     });
   }
+
+  static Future pullUserData(User user) async {
+    if (uid == null) {
+      uid = await getDeviceUuid();
+    }
+
+    // If file exists, grab data from
+    if (await checkIfDocExists(uid, 'user_data')) {
+      CollectionReference collectionRef = Firestore.instance.collection('user_data');
+
+      DocumentSnapshot doc = await collectionRef.document(uid).get();
+
+      // Update
+      user.user_mpg = doc.data['user_mpg'];
+      user.user_heat_avg = doc.data['user_heat_avg'];
+      print(user.user_mpg);
+      print(user.user_heat_avg);
+
+    }
+    // If file
+    else {
+      print("Set data in document to default");
+
+      user_data.document(uid).setData({
+        'user_heat_avg': user.user_heat_avg,
+        'user_mpg': user.user_mpg,
+      });
+    }
+
+  }
 }
 
 Future<bool> checkIfDocExists(String docId, String collection_name) async {
   try {
     // Get reference to Firestore collection
-    var collectionRef = Firestore.instance.collection(collection_name);
+    CollectionReference collectionRef = Firestore.instance.collection(collection_name);
 
-    var doc = await collectionRef.document(docId).get();
+    DocumentSnapshot doc = await collectionRef.document(docId).get();
     return doc.exists;
   } catch (e) {
     return false;

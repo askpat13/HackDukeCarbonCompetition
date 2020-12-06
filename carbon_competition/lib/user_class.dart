@@ -18,6 +18,6 @@ class User {
   }
 
   void pullFromDatabase() {
-    throw new UnsupportedError("Not implemented");
+    DatabaseService.pullUserData(this);
   }
 }
