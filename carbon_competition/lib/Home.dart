@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'BottomNavBar.dart';
+import 'package:carbon_competition/user_class.dart';
 
 class CarbonHome extends StatelessWidget {
   @override
@@ -63,8 +64,9 @@ class UserCard extends StatelessWidget {
          margin: new EdgeInsets.only(left: 20, right: 20),
          child: Column(
            children: <Widget> [
-             Text('Username'),
+             Text(User.name),
              Text('lvl 1'),
+             Text('Your most recent carbon output was ' + '2' + ' lbs.'),
            ],
          ),
      decoration: new BoxDecoration(
