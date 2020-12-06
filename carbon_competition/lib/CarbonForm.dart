@@ -28,6 +28,7 @@ class CarbonForm extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _CarbonForm extends State<CarbonForm> {
+  String primaryFood ='food';
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -39,33 +40,33 @@ class _CarbonForm extends State<CarbonForm> {
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'What did you eat?',
+              hintText: 'What was your protein',
             ),
             validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
+              if (value.toLowerCase() != 'Beef' || value.toLowerCase() != 'Pork' || value.toLowerCase() != 'Poultry' || value.toLowerCase() != 'Lamb') {
+                return 'Enter either pork, beef, poultry, or lamb';
               }
               return null;
             },
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'How much did you drive',
+              hintText: 'What were your carbs',
             ),
             validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
+              if (value.toLowerCase() != 'grains' || value.toLowerCase() != 'vegetables' || value.toLowerCase() != 'Wheat') {
+                return 'Enter either grains, vegetables, or wheat';
               }
               return null;
             },
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'blah blah',
+              hintText: 'What did you drink',
             ),
             validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
+              if (value.toLowerCase() != 'soda' || value.toLowerCase() != 'beer' || value.toLowerCase() != 'wine' || value.toLowerCase() != 'water' || value.toLowerCase() != 'juice' || value.toLowerCase() != 'spirits' ) {
+                return 'Enter either soda, beer, wine, water, spirits, or juice';
               }
               return null;
             },
