@@ -14,16 +14,17 @@ class DatabaseService {
   static final CollectionReference user_data = Firestore.instance.collection('user_data');
   static final CollectionReference carbon_use_data = Firestore.instance.collection('carbon_use_data');
 
-  // send user data to database
   static Future updateUserData(User user) async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
 
     if (await checkIfDocExists(uid, 'user_data')) {
-      print("The document exists.");
-    } else {
-      print("The document does not exist.");
+      print("exists");
+    }
+    // If file
+    else {
+      print("no");
     }
 
     return await user_data.document(uid).setData({
@@ -32,28 +33,45 @@ class DatabaseService {
     });
   }
 
-  // get data from database for user
-  static Future<Map<String, dynamic>> getUserData() async {
+  static Future pullUserData(User user) async {
+    if (uid == null) {
+      uid = await getDeviceUuid();
+    }
+
+    // If file exists, grab data from
     if (await checkIfDocExists(uid, 'user_data')) {
-      DocumentReference doc = user_data.document(uid);
-      DocumentSnapshot snapshot = await doc.get();
-      Map<String, dynamic> data = snapshot.data;
-      return data;
-    } else {
-      print("Document does not exist.");
-      return null;
+      CollectionReference collectionRef = Firestore.instance.collection('user_data');
+
+      DocumentSnapshot doc = await collectionRef.document(uid).get();
+
+      // Update
+      user.user_mpg = doc.data['user_mpg'];
+      user.user_heat_avg = doc.data['user_heat_avg'];
+      print(user.user_mpg);
+      print(user.user_heat_avg);
+
     }
+    // If file
+    else {
+      print("Set data in document to default");
+
+      user_data.document(uid).setData({
+        'user_heat_avg': user.user_heat_avg,
+        'user_mpg': user.user_mpg,
+      });
+    }
+
   }
+}
 
-  static Future<bool> checkIfDocExists(String docId, String collection_name) async {
-    try {
-      // Get reference to Firestore collection
-      var collectionRef = Firestore.instance.collection(collection_name);
+Future<bool> checkIfDocExists(String docId, String collection_name) async {
+  try {
+    // Get reference to Firestore collection
+    CollectionReference collectionRef = Firestore.instance.collection(collection_name);
 
-      var doc = await collectionRef.document(docId).get();
-      return doc.exists;
-    } catch (e) {
-      return false;
-    }
+    DocumentSnapshot doc = await collectionRef.document(docId).get();
+    return doc.exists;
+  } catch (e) {
+    return false;
   }
 }

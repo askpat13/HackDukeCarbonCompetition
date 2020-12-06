@@ -12,19 +12,12 @@ class User {
 
   User(this.user_heat_avg, this.user_mpg);
 
-  // send this user to the database
   void updateDatabase() {
+
     DatabaseService.updateUserData(this);
   }
 
-  // get data from database and update the user
-  void pullFromDatabase() async {
-    Map<String, dynamic> data = await DatabaseService.getUserData();
-    if (data == null) {
-      print("pullFromDatabase() failed - data was null.");
-    } else {
-      user_heat_avg = data["user_heat_avg"];
-      user_mpg = data["user_mpg"];
-    }
+  void pullFromDatabase() {
+    DatabaseService.pullUserData(this);
   }
 }
