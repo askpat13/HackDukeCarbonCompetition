@@ -5,8 +5,20 @@ import 'package:carbon_competition/main.dart';
 import 'package:carbon_competition/carbon_calcs/house_carbon_calc.dart';
 
 class Settings extends StatelessWidget {
+  var name = '[BLANK]';
+  var mpg = '[BLANK]';
+  var zip = '[BLANK]';
   @override
   Widget build(BuildContext context) {
+    if (User.name != '') {
+      name = User.name;
+    }
+    if (User.userMpg.toString() != '') {
+      mpg = User.userMpg.toString();
+    }
+    if (User.zip != '') {
+      zip = User.zip;
+    }
     return Scaffold(
       appBar: AppBar(
           title: Center(
@@ -14,7 +26,14 @@ class Settings extends StatelessWidget {
            Text('Settings'),
         ),
       ),
-      body: CarbonForm(),
+      body: Column(
+        children: [
+          Text('Currently your name is ' + name + ', your car Mpg is ' + mpg +
+              ', and your Zip code is ' + zip + '.   If you need to change any of this information, simply fill out the form below.',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          CarbonForm()
+        ],
+      ),
       bottomNavigationBar: BottomNavBar(),
     );
   }
@@ -59,7 +78,7 @@ class _CarbonForm extends State<CarbonForm> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                icon: Icon(Icons.circle),
+                icon: Icon(Icons.directions_car),
                 hintText: 'What is the mileage per gallon of your car?',
                 labelText: 'Car MPG *',
               ),
@@ -77,7 +96,7 @@ class _CarbonForm extends State<CarbonForm> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                icon: Icon(Icons.star),
+                icon: Icon(Icons.house_siding),
                 hintText: 'Where is your location?',
                 labelText: 'ZIP CODE *',
               ),

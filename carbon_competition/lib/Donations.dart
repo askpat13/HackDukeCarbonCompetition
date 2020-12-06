@@ -29,7 +29,7 @@ class MyStatelessWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.home_work),
               title: Text('The Information Technology and Innovative Foundation'),
               subtitle: Text('A highly regarded US think tank that runs the Clean Energy Innovation program, which looks into clean energy research and development and  then advises policymakers on the best course of action.'),
             ),
@@ -49,7 +49,7 @@ class MyStatelessWidget extends StatelessWidget {
               ],
             ),
             const ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.home_work),
               title: Text('The Clean Air Task Force'),
               subtitle: Text('A US-based non-governmental organization (NGO) that has been working to reduce air pollution since its founding in 1996.'),
             ),
@@ -69,7 +69,7 @@ class MyStatelessWidget extends StatelessWidget {
               ],
             ),
             const ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.home_work),
               title: Text('Carbonfund.org'),
               subtitle: Text('An organization making it easy and affordable for any individual, business or organization to reduce & offset their climate impact and hasten the transition to a clean energy future.'),
             ),
