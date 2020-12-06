@@ -12,11 +12,17 @@ class Leaderboard extends StatelessWidget {
           Text('Leaderboard'),
         ),
       ),
-      body: Container(
-        child: Center(
-            child: Text('Check friends activity')
-        ),
+      body: ListView(
+        children: <Widget>[
+          ListTile(leading: Icon(Icons.more_vert),title: Text("User Pic here"),
+            subtitle: Text("Username"),
+            trailing: Text("Points"),)
+
+        ],
       ),
+
+
+
       bottomNavigationBar: BottomNavBar(),
     );
   }
