@@ -50,13 +50,13 @@ class UserCard extends StatelessWidget {
    alignment: Alignment.topCenter,
      child: new Image(
        image: new AssetImage("assets/images/pixeldude.png"),
-       height: 100,
-       width: 100,
+       height: 66,
+       width: 66,
      ),
  );
 
  final avatarCard = new Container(
-         height: 100.0,
+         height: 60.0,
          width: double.infinity,
          margin: new EdgeInsets.only(left: 20, right: 20),
          child: Column(
