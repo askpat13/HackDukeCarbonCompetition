@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:carbon_competition/carbon_calc.dart';
+import 'package:carbon_competition/carbon_calcs/carbon_calc.dart';
 
 import '../device_uuid.dart';
 import '../user_class.dart';

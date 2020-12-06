@@ -1,6 +1,6 @@
 // Carbon calculation algorithm
-import "package:carbon_competition/meal_carbon_calc.dart";
-import "package:carbon_competition/transport_carbon_calc.dart";
+import 'package:carbon_competition/carbon_calcs/meal_carbon_calc.dart';
+import 'package:carbon_competition/carbon_calcs/transport_carbon_calc.dart';
 import "package:carbon_competition/user_class.dart";
 
 
