@@ -44,7 +44,7 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (User.name != "") {
+    if (User.name != null) {
       name = User.name;
     }
     return new Container(
