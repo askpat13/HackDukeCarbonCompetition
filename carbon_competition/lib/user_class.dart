@@ -35,7 +35,7 @@ class User {
   }
 
   // get carbon (kilograms) for today
-  static double getCarbon(int carbon) {
+  static double getCarbon() {
     int dayNo = today();
     if (!dataByDay.containsKey(dayNo)) {
       return 0;
