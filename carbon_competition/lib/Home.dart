@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'BottomNavBar.dart';
 import 'package:carbon_competition/user_class.dart';
+import 'package:intl/intl.dart';
 
 class CarbonHome extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class CarbonHome extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: Icon(Icons.nature_outlined),
-                  title: Text(DateTime.now().toString()),
+                  title: Text(DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now()).toString()),
                   trailing: Text(User.getCarbon().toString()),
                   ),
               ),
