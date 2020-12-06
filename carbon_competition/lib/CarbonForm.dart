@@ -179,8 +179,8 @@ class _CarbonForm extends State<CarbonForm> {
                 }
                 showDialog(context: context, child:
                 new AlertDialog(
-                  title: new Text("Your Carbon Usage was:"),
-                  content: new Text('20'),
+                  title: new Text("Current daily carbon usage is:"),
+                  content: new Text(User.getCarbon().toString()),
                 )
                 );
               },
