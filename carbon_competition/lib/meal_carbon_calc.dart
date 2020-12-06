@@ -1,20 +1,20 @@
 class Meal {
-  String primary_type;
-  String side_type;
-  Drink meal_drinks;
+  String primaryType;
+  String sideType;
+  Drink mealDrinks;
 
-  Meal(this.primary_type, this.side_type, this.meal_drinks);
+  Meal(this.primaryType, this.sideType, this.mealDrinks);
 }
 
 class Drink {
-  String drink_type;
-  int num_drinks;
+  String drinkType;
+  int numDrinks;
 
-  Drink(this.drink_type, this.num_drinks);
+  Drink(this.drinkType, this.numDrinks);
 }
 
 // Source: https://ourworldindata.org/food-choice-vs-eating-local
-var food_carbon_constants = {
+var foodCarbonConstants = {
   "beef":60.0, // per kg
   "lamb":24.0,
   "pork":7.0,
@@ -24,14 +24,16 @@ var food_carbon_constants = {
   "vegetable":0.7,
 };
 
-// Source: https://www.bieroundtable.com/wp-content/uploads/49d7a0_7a5cfa72d8e74c04be5aeb81f38b136b.pdf
+// Sources: https://www.bieroundtable.com/wp-content/uploads/49d7a0_7a5cfa72d8e74c04be5aeb81f38b136b.pdf
 // https://klementoninvesting.substack.com/p/the-carbon-footprint-of-drinking
 // https://www.environmentalleader.com/2009/01/carbon-footprint-of-tropicana-orange-juice-17-kg/
-var drink_carbon_constants = {
+// https://tappwater.co/us/carbon-footprint-bottled-water/
+var drinkCarbonConstants = {
   "soda":0.2, // per drink
   "beer":0.330,
   "wine":0.275,
   "spirits":0.123,
+  "bottled water":0.042, // bottled water 8oz
   "juice":0.2125, // orange juice, 8oz serving
 };
 
@@ -39,42 +41,42 @@ double calcCarbonFromMeals(List<Meal> meals) {
   // TODO: don't assume 2000 calories
 
   // Add carbon for all meals
-  double meals_carbon_used = 0;
+  double mealsCarbonUsed = 0;
   for (int ii = 0; ii < meals.length; ii++) {
-    Meal current_meal = meals[ii];
+    Meal currentMeal = meals[ii];
 
     // Calculate carbon contribution of primary makeup
-    meals_carbon_used += calcCarbonFromPrimary(current_meal.primary_type);
+    mealsCarbonUsed += calcCarbonFromPrimary(currentMeal.primaryType);
 
     // Calculate carbon contribution of side makeup
-    meals_carbon_used += calcCarbonFromSide(current_meal.side_type);
+    mealsCarbonUsed += calcCarbonFromSide(currentMeal.sideType);
 
     // Calculate carbon contribution of drink makeup
-    meals_carbon_used += calcCarbonFromDrink(current_meal.meal_drinks);
+    mealsCarbonUsed += calcCarbonFromDrink(currentMeal.mealDrinks);
   }
-  return meals_carbon_used;
+  return mealsCarbonUsed;
 }
 
-double calcCarbonFromPrimary(String primary_type) {
+double calcCarbonFromPrimary(String primaryType) {
   // Meat serving source: https://calculate-this.com/meat-person-calculator
-  double standard_serving_kg = 0.2;
-  double food_carbon_per_kg = food_carbon_constants[primary_type];
+  double standardServingKg = 0.2;
+  double foodCarbonPerKg = foodCarbonConstants[primaryType];
 
-  return food_carbon_per_kg * standard_serving_kg;
+  return foodCarbonPerKg * standardServingKg;
 }
 
-double calcCarbonFromSide(String side_type) {
+double calcCarbonFromSide(String sideType) {
   // Assume half as much as primary
-  double standard_serving_kg = 0.1;
-  double food_carbon_per_kg = food_carbon_constants[side_type];
+  double standardServingKg = 0.1;
+  double foodCarbonPerKg = foodCarbonConstants[sideType];
 
-  return food_carbon_per_kg * standard_serving_kg;
+  return foodCarbonPerKg * standardServingKg;
 }
 
 double calcCarbonFromDrink(Drink drink) {
-  double drink_carbon_per_kg = drink_carbon_constants[drink.drink_type];
+  double drinkCarbonPerKg = drinkCarbonConstants[drink.drinkType];
 
-  return drink_carbon_per_kg * drink.num_drinks;
+  return drinkCarbonPerKg * drink.numDrinks;
 }
 
 // Testing functionality
