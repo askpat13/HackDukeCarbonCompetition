@@ -1,5 +1,4 @@
-import "package:carbon_competition/services/database.dart";
-import 'package:flutter/rendering.dart';
+import "services/database.dart";
 
 import 'daily_class.dart';
 
