@@ -1,4 +1,8 @@
 import "services/database.dart";
+import 'dart:collection';
+
+import "package:carbon_competition/services/database.dart";
+import 'package:flutter/rendering.dart';
 
 import 'daily_class.dart';
 
@@ -13,11 +17,28 @@ class User {
   int userMpg;
 
   // daily data
-  Map<int, DailyData> dataByDay;
+  HashMap<int, DailyData> dataByDay;
 
   // constructor
   User(this.userHeatAvg, this.userMpg) {
-    this.dataByDay = new Map<int, DailyData>();
+    this.dataByDay = new HashMap<int, DailyData>();
+  }
+
+  // add carbon (kilograms) to today's entry
+  void addCarbon(int carbon) {
+    int dayNo = today();
+    if (!dataByDay.containsKey(dayNo)) {
+      dataByDay[dayNo] = new DailyData();
+    }
+    dataByDay[dayNo].addCarbon(carbon);
+    int newCarbon = dataByDay[dayNo].carbonUsage;
+  }
+
+  // get a unique integer representing today
+  int today() {
+    DateTime now = new DateTime.now();
+    int dayNo = ((now.year - 2000) * 500) + (now.month * 32) + now.day;
+    return dayNo;
   }
 
   Future<void> pushToDatabase() async {
@@ -31,5 +52,6 @@ class User {
   void printUser() {
     print("Heat Average $userHeatAvg");
     print("Miles Per Gallon $userMpg");
+    //dataByDay.forEach((k,v) => {print(k,v)});
   }
 }
