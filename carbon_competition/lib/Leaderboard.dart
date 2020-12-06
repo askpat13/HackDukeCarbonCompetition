@@ -16,12 +16,14 @@ class Leaderboard extends StatelessWidget {
 
 
         children: <Widget>[
+      Container(
+        padding: EdgeInsets.only(top: 10),
+      child: Image.network("https://lh3.googleusercontent.com/proxy/yH-wKB0IRPlPAMs5Ocr7jOLhkcid208ZpFqCVWc-95T_U2I60zmTb15yCCVDjLwrBtj-Vvw19kodReNgqI_0gJCAFJm-ikPhllUv9g9A4tDgrk966FNZM4me",
 
-      Image.network("https://lh3.googleusercontent.com/proxy/yH-wKB0IRPlPAMs5Ocr7jOLhkcid208ZpFqCVWc-95T_U2I60zmTb15yCCVDjLwrBtj-Vvw19kodReNgqI_0gJCAFJm-ikPhllUv9g9A4tDgrk966FNZM4me",
-
+          alignment: Alignment(-0.9, 3.0),
           height: 50,
         width: 50),
-
+    ),
 
 
 
