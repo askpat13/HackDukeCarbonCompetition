@@ -85,9 +85,9 @@ class DatabaseService {
     HashMap<String, dynamic> serializedData = HashMap<String, dynamic>.from(
         serializedDataByDay);
     HashMap<int, DailyData> dataByDay;
+    dataByDay = new HashMap<int, DailyData>();
     insertDailyClass(day, dailyData) {
       int index = int.parse(day);
-      dataByDay = new HashMap<int, DailyData>();
       dataByDay[index] = new DailyData(dailyData['carbonUsage']);
     }
     serializedData.forEach(insertDailyClass);
