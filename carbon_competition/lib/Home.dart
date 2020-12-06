@@ -21,10 +21,24 @@ class CarbonHome extends StatelessWidget {
       ),
       body:
       Column(
-      children: [
+      children: <Widget>[
         UserCard(),
         ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/dailycarbon');}
-        , child: Text('Enter your daily carbon data!'))
+        , child: Text('Enter your daily carbon data!')),
+        new ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            User.dataByDay.forEach((day, dailydata) {
+              return new Card(
+                child: const ListTile(
+                  leading: const Icon(Icons.nature_outlined),
+                  title: Text('Day '),
+                  trailing: Text('Carbon '),
+                  ),
+                );
+              });
+            },
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),
@@ -33,55 +47,58 @@ class CarbonHome extends StatelessWidget {
 }
 
 class UserCard extends StatelessWidget {
- @override
+  var name = "User";
+
+  @override
   Widget build(BuildContext context) {
-  return new Container(
+    if (User.name != "") {
+      name = User.name;
+    }
+    return new Container(
       margin: const EdgeInsets.symmetric(
         vertical: 16.0,
         horizontal: 24.0,
       ),
-    child: new Column(
-      children: <Widget>[
-        avatarThumbnail,
-        avatarCard,
-      ],
-    ),
+      child: new Column(
+        children: <Widget>[
+          avatarThumbnail,
+          Container(
+            height: 60.0,
+            width: double.infinity,
+            margin: new EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              children: <Widget>[
+                Text(name),
+                Text('Lvl 1'),
+                Text('Your carbon output today was ' + '2' + ' lbs.'),
+              ],
+            ),
+            decoration: new BoxDecoration(
+              color: new Color(0xFFE8F5E9),
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.circular(8.0),
+              boxShadow: <BoxShadow>[
+                new BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 10.0,
+                  offset: new Offset(0.0, 10.0),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
 
  final avatarThumbnail = new Container(
    alignment: Alignment.topCenter,
      child: new Image(
-       image: new AssetImage("assets/images/pixeldude.png"),
+       image: new AssetImage("assets/images/pixeldude1.png"),
        height: 66,
        width: 66,
      ),
  );
 
- final avatarCard = new Container(
-         height: 60.0,
-         width: double.infinity,
-         margin: new EdgeInsets.only(left: 20, right: 20),
-         child: Column(
-           children: <Widget> [
-             Text(User.name),
-             Text('lvl 1'),
-             Text('Your most recent carbon output was ' + '2' + ' lbs.'),
-           ],
-         ),
-     decoration: new BoxDecoration(
-       color: new Color(0xFFE8F5E9),
-       shape: BoxShape.rectangle,
-       borderRadius: new BorderRadius.circular(8.0),
-       boxShadow: <BoxShadow>[
-         new BoxShadow(
-           color: Colors.black12,
-           blurRadius: 10.0,
-           offset: new Offset(0.0, 10.0),
-         ),
-       ],
-     ),
-   );
-
-}
 
