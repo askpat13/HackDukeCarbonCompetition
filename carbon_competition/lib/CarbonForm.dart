@@ -179,7 +179,7 @@ class _CarbonForm extends State<CarbonForm> {
                 }
                 showDialog(context: context, child:
                 new AlertDialog(
-                  title: new Text("Current daily carbon usage is:"),
+                  title: new Text("Current daily carbon usage (kg) is:"),
                   content: new Text(User.getCarbon().toString()),
                 )
                 );
@@ -192,7 +192,15 @@ class _CarbonForm extends State<CarbonForm> {
             child: ElevatedButton(
               onPressed: () {
                 User.resetCarbon();
+                User.pushToDatabase();
                 _formKey.currentState.reset();
+
+                showDialog(context: context, child:
+                new AlertDialog(
+                  title: new Text("Reset to average carbon footprint from house (kg):"),
+                  content: new Text(User.getCarbon().toString()),
+                )
+                );
               },
               child: Text('Reset'),
             ),
