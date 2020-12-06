@@ -1,5 +1,7 @@
+import 'package:carbon_competition/carbon_calcs/carbonform_info_class.dart';
+import 'package:carbon_competition/carbon_calcs/meal_carbon_calc.dart';
 import 'package:flutter/material.dart';
-
+import 'package:carbon_competition/user_class.dart';
 import 'BottomNavBar.dart';
 
 
@@ -40,48 +42,139 @@ class _CarbonForm extends State<CarbonForm> {
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'What was your protein',
+              hintText: 'Primary food type for MEAL 1',
             ),
             validator: (value) {
-              if (value.toLowerCase() != 'Beef' || value.toLowerCase() != 'Pork' || value.toLowerCase() != 'Poultry' || value.toLowerCase() != 'Lamb') {
-                return 'Enter either pork, beef, poultry, or lamb';
+              if (!foodCarbonConstants.containsKey(value.toLowerCase())) {
+                return 'Enter valid food type (beef, lamb, pork, dairy, poultry, rice, wheat, vegetable, none)';
+              }
+              // Otherwise, save the data to meals
+              else {
+                double carbonFromPrimary = calcCarbonFromPrimary(value);
+                User.addCarbon(carbonFromPrimary);
+                User.pushToDatabase();
               }
               return null;
             },
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'What were your carbs',
+              hintText: 'Side food type for MEAL 1',
             ),
             validator: (value) {
-              if (value.toLowerCase() != 'grains' || value.toLowerCase() != 'vegetables' || value.toLowerCase() != 'Wheat') {
-                return 'Enter either grains, vegetables, or wheat';
+              if (!foodCarbonConstants.containsKey(value.toLowerCase())) {
+                return 'Enter valid food type (beef, lamb, pork, dairy, poultry, rice, wheat, vegetable, none)';
+              }
+              // Otherwise, save the data to meals
+              else {
+                double carbonFromSide = calcCarbonFromSide(value);
+                User.addCarbon(carbonFromSide);
+                User.pushToDatabase();
+              }
+              return null;
+            },
+          ),
+          // TextFormField(
+          //   decoration: const InputDecoration(
+          //     hintText: 'What did you drink for MEAL 1',
+          //   ),
+          //   validator: (value) {
+          //     if (value.toLowerCase() != 'soda' || value.toLowerCase() != 'beer' || value.toLowerCase() != 'wine' || value.toLowerCase() != 'water' || value.toLowerCase() != 'juice' || value.toLowerCase() != 'spirits' ) {
+          //       return 'Enter either soda, beer, wine, water, spirits, or juice';
+          //     }
+          //     return null;
+          //   },
+          // ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Primary food type for MEAL 2',
+            ),
+            validator: (value) {
+              if (!foodCarbonConstants.containsKey(value.toLowerCase())) {
+                return 'Enter valid food type (beef, lamb, pork, dairy, poultry, rice, wheat, vegetable, none)';
+              }
+              // Otherwise, save the data to meals
+              else {
+                double carbonFromPrimary = calcCarbonFromPrimary(value);
+                User.addCarbon(carbonFromPrimary);
+                User.pushToDatabase();
               }
               return null;
             },
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'What did you drink',
+              hintText: 'Side food type for MEAL 2',
             ),
             validator: (value) {
-              if (value.toLowerCase() != 'soda' || value.toLowerCase() != 'beer' || value.toLowerCase() != 'wine' || value.toLowerCase() != 'water' || value.toLowerCase() != 'juice' || value.toLowerCase() != 'spirits' ) {
-                return 'Enter either soda, beer, wine, water, spirits, or juice';
+              if (!foodCarbonConstants.containsKey(value.toLowerCase())) {
+                return 'Enter valid food type (beef, lamb, pork, dairy, poultry, rice, wheat, vegetable, none)';
+              }
+              // Otherwise, save the data to meals
+              else {
+                double carbonFromSide = calcCarbonFromSide(value);
+                User.addCarbon(carbonFromSide);
+                User.pushToDatabase();
+              }
+              return null;
+            },
+          ),
+          // TextFormField(
+          //   decoration: const InputDecoration(
+          //     hintText: 'What did you drink for MEAL 2',
+          //   ),
+          //   validator: (value) {
+          //     if (value.toLowerCase() != 'soda' || value.toLowerCase() != 'beer' || value.toLowerCase() != 'wine' || value.toLowerCase() != 'water' || value.toLowerCase() != 'juice' || value.toLowerCase() != 'spirits' ) {
+          //       return 'Enter either soda, beer, wine, water, spirits, or juice';
+          //     }
+          //     return null;
+          //   },
+          // ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Primary food type for MEAL 3',
+            ),
+            validator: (value) {
+              if (!foodCarbonConstants.containsKey(value.toLowerCase())) {
+                return 'Enter valid food type (beef, lamb, pork, dairy, poultry, rice, wheat, vegetable, none)';
+              }
+              // Otherwise, save the data to meals
+              else {
+                double carbonFromPrimary = calcCarbonFromPrimary(value);
+                User.addCarbon(carbonFromPrimary);
+                User.pushToDatabase();
               }
               return null;
             },
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Blah',
+              hintText: 'Side food type for MEAL 3',
             ),
             validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
+              if (!foodCarbonConstants.containsKey(value.toLowerCase())) {
+                return 'Enter valid food type (beef, lamb, pork, dairy, poultry, rice, wheat, vegetable, none)';
+              }
+              // Otherwise, save the data to meals
+              else {
+                double carbonFromSide = calcCarbonFromSide(value);
+                User.addCarbon(carbonFromSide);
+                User.pushToDatabase();
               }
               return null;
             },
           ),
+          // TextFormField(
+          //   decoration: const InputDecoration(
+          //     hintText: 'What did you drink for MEAL 3',
+          //   ),
+          //   validator: (value) {
+          //     if (value.toLowerCase() != 'soda' || value.toLowerCase() != 'beer' || value.toLowerCase() != 'wine' || value.toLowerCase() != 'water' || value.toLowerCase() != 'juice' || value.toLowerCase() != 'spirits' ) {
+          //       return 'Enter either soda, beer, wine, water, spirits, or juice';
+          //     }
+          //     return null;
+          //   },
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
@@ -89,6 +182,7 @@ class _CarbonForm extends State<CarbonForm> {
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState.validate()) {
+                  print("HI");
                   // Process data.
                 }
               },
