@@ -1,3 +1,4 @@
+import 'package:carbon_competition/CarbonForm.dart';
 import 'package:carbon_competition/Donations.dart';
 import 'package:flutter/material.dart';
 import 'package:carbon_competition/Home.dart';
@@ -18,14 +19,15 @@ void main() {
       '/home': (context) => CarbonHome(),
       '/leader': (leadContext) => Leaderboard(),
       '/donations': (donoContext) => Donations(),
-      '/settings': (settingsContext) => Settings()
+      '/settings': (settingsContext) => Settings(),
+      '/dailycarbon': (carbonContext) => CarbonTracker()
     },
   ));
   initializeUser();
 }
 
 void initializeUser() async {
-  User.addCarbon(500);
   await User.pullFromDatabase();
+  User.addCarbon(600);
   User.printUser();
 }

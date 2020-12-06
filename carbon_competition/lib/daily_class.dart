@@ -12,4 +12,9 @@ class DailyData {
   void addCarbon(int carbon) {
     carbonUsage += carbon;
   }
+
+  // print this DailyData
+  void printDailyData() {
+    print("Carbon Usage: $carbonUsage");
+  }
 }
