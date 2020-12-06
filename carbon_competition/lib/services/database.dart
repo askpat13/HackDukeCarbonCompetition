@@ -36,6 +36,7 @@ class DatabaseService {
       'name': User.name,
       'zip': User.zip,
       'level': User.level,
+      'icon': User.icon,
       'userMpg': User.userMpg,
       'userAvgDailyHousingCarbon': User.userAvgDailyHousingCarbon,
       'dataByDay': _serialize(User.dataByDay)
@@ -60,6 +61,7 @@ class DatabaseService {
       User.name = doc.data['name'];
       User.level = doc.data['level'];
       User.zip = doc.data['zip'];
+      User.icon = doc.data['icon'];
       User.userMpg = doc.data['userMpg'];
       User.userAvgDailyHousingCarbon = doc.data['userAvgDailyHousingCarbon'];
       User.dataByDay = _deserialize(doc.data['dataByDay']);

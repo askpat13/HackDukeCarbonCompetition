@@ -13,6 +13,7 @@ class User {
   static String name = "User";
   static String zip = "";
   static int level = 0;
+  static int icon = 0;
 
   // TODO: input in different units
   // static int userHeatAvg = 0; //dollars
