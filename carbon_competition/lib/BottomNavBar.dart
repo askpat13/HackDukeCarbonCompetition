@@ -5,7 +5,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      padding: EdgeInsets.only(top: 0, bottom: 40),
+      padding: EdgeInsets.only(bottom: 40),
       color: Colors.white,
       child:
         Row(
