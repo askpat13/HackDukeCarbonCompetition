@@ -31,24 +31,14 @@ class DatabaseService {
       print("The document does not exist, pushing.");
     }
 
-    // Convert dataByDay to a serializable type
-    HashMap<String, HashMap<String, dynamic>> serializedData = new HashMap<String, HashMap<String, dynamic>>();
-    serialize(day, dailyData) {
-      String index = day.toString();
-      serializedData[index] = new HashMap<String, dynamic>();
-      serializedData[index]['carbonUsage'] = User.dataByDay[day].carbonUsage;
-    }
-    User.dataByDay.forEach(serialize);
-    print(serializedData);
-
     // update database
     return await userData.document(uid).setData({
       'name': User.name,
       'zip': User.zip,
       'level': User.level,
-      'userAvgDailyHousingCarbon': User.userAvgDailyHousingCarbon,
       'userMpg': User.userMpg,
-      'dataByDay': serializedData
+      'userAvgDailyHousingCarbon': User.userAvgDailyHousingCarbon,
+      'dataByDay': _serialize(User.dataByDay)
     });
   }
 
@@ -72,22 +62,60 @@ class DatabaseService {
       User.zip = doc.data['zip'];
       User.userMpg = doc.data['userMpg'];
       User.userAvgDailyHousingCarbon = doc.data['userAvgDailyHousingCarbon'];
-
-      // Update day-by-day data (convert back to HashMap)
-      //HashMap<String, HashMap<String, dynamic>> serializedData = HashMap<String, dynamic>.from(doc.data['dataByDay']);
-      HashMap<String, dynamic> serializedData = HashMap<String, dynamic>.from(doc.data['dataByDay']);
-      HashMap<int, DailyData> dataByDay;
-      deserialize(day, dailyData) {
-        int index = int.parse(day);
-        dataByDay = new HashMap<int, DailyData>();
-        dataByDay[index] = new DailyData(dailyData['carbonUsage']);
-      }
-      serializedData.forEach(deserialize);
-      User.dataByDay = dataByDay;
-
-    } else {
-      print("Document does not exist, cannot pull.");
+      User.dataByDay = _deserialize(doc.data['dataByDay']);
     }
+  }
+
+  // serialize data for database
+  static HashMap<String, HashMap<String, dynamic>> _serialize(HashMap<int, DailyData> dataByDay) {
+    HashMap<String, HashMap<String, dynamic>> serializedData = new HashMap<String, HashMap<String, dynamic>>();
+    serialize(day, dailyData) {
+      String index = day.toString();
+      serializedData[index] = new HashMap<String, dynamic>();
+      serializedData[index]['carbonUsage'] = User.dataByDay[day].carbonUsage;
+    }
+    dataByDay.forEach(serialize);
+    return serializedData;
+  }
+
+  // deserialize daily data from database
+  static HashMap<int, DailyData> _deserialize(dynamic serializedDataByDay) {
+    HashMap<String, dynamic> serializedData = HashMap<String, dynamic>.from(
+        serializedDataByDay);
+    HashMap<int, DailyData> dataByDay;
+    insertDailyClass(day, dailyData) {
+      int index = int.parse(day);
+      dataByDay = new HashMap<int, DailyData>();
+      dataByDay[index] = new DailyData(dailyData['carbonUsage']);
+    }
+    serializedData.forEach(insertDailyClass);
+    return dataByDay;
+  }
+
+  // get top users from leaderboard
+  static Future<List<LeaderboardEntry>> getTopScores() async {
+    // Get list of all user documents
+    CollectionReference collectionRef = Firestore.instance.collection('userData');
+    QuerySnapshot querySnapshot = await collectionRef.getDocuments();
+    List<DocumentSnapshot> documentSnapshots = querySnapshot.documents;
+
+    // Create a list of sortable LeaderboardEntries.
+    List<LeaderboardEntry> leaders = new List<LeaderboardEntry>();
+    addLeader(snapshot) {
+      String name = snapshot.data['name'];
+      int today = User.today();
+      HashMap<int, DailyData> allDailyData = _deserialize(snapshot.data['dataByDay']);
+      DailyData todayData = allDailyData[today];
+      int carbon = todayData.carbonUsage;
+      LeaderboardEntry newEntry = new LeaderboardEntry(name, carbon);
+      leaders.add(newEntry);
+    }
+    documentSnapshots.forEach(addLeader);
+
+    // Sort leaders by lowest carbon values
+    //leaders.sort();
+    leaders.sort((entry1, entry2) => entry1.compareTo(entry2));
+    return leaders;
   }
 }
 
@@ -100,5 +128,18 @@ Future<bool> checkIfDocExists(String docId, String collectionName) async {
     return doc.exists;
   } catch (e) {
     return false;
+  }
+}
+
+class LeaderboardEntry {
+  String name;
+  int carbon;
+  LeaderboardEntry(this.name, this.carbon);
+
+  // NOTE: Less carbon is better.
+  int compareTo(LeaderboardEntry other) {
+    if (this.carbon < other.carbon) {return 1;}
+    else if (this.carbon > other.carbon) {return -1;}
+    else {return 0;}
   }
 }
