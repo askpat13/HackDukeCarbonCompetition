@@ -11,20 +11,21 @@ class DatabaseService {
   static String uid;
 
   // collection reference
-  static final CollectionReference user_data = Firestore.instance.collection('user_data');
-  static final CollectionReference carbon_use_data = Firestore.instance.collection('carbon_use_data');
+  static final CollectionReference user_data = Firestore.instance.collection(
+      'user_data');
+  static final CollectionReference carbon_use_data = Firestore.instance
+      .collection('carbon_use_data');
 
-  static Future updateUserData(User user) async {
+  // send user data to database
+  static Future<void> updateUserData(User user) async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
 
     if (await checkIfDocExists(uid, 'user_data')) {
-      print("exists");
-    }
-    // If file
-    else {
-      print("no");
+      print("The document exists, pushing.");
+    } else {
+      print("The document does not exist, pushing.");
     }
 
     return await user_data.document(uid).setData({
@@ -33,34 +34,26 @@ class DatabaseService {
     });
   }
 
-  static Future pullUserData(User user) async {
+  // get data from database for user
+  static Future<void> pullUserData(User user) async {
     if (uid == null) {
       uid = await getDeviceUuid();
     }
 
     // If file exists, grab data from
     if (await checkIfDocExists(uid, 'user_data')) {
-      CollectionReference collectionRef = Firestore.instance.collection('user_data');
+      print("Document exists, pulling.");
+      CollectionReference collectionRef = Firestore.instance.collection(
+          'user_data');
 
       DocumentSnapshot doc = await collectionRef.document(uid).get();
 
       // Update
       user.user_mpg = doc.data['user_mpg'];
       user.user_heat_avg = doc.data['user_heat_avg'];
-      print(user.user_mpg);
-      print(user.user_heat_avg);
-
+    } else {
+      print("Document does not exist, cannot pull.");
     }
-    // If file
-    else {
-      print("Set data in document to default");
-
-      user_data.document(uid).setData({
-        'user_heat_avg': user.user_heat_avg,
-        'user_mpg': user.user_mpg,
-      });
-    }
-
   }
 }
 
